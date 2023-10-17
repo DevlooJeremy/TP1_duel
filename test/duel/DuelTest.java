@@ -8,17 +8,45 @@ import org.junit.jupiter.api.Test;
 
 import Exception.DeadDuelistCanNotDuelException;
 import duelistMock.DuelistSpy;
-import duelistMock.DuelistStub;
+import duelistMock.DeadDuelistMock;
+import duelistMock.DuelistDummy;
+import duelistMock.SurrenderDuelistMock;
 
 class DuelTest {
+	
+	private static final int POINTS_FOR_WINNER = 1;
+	private static final int POINTS_FOR_LOSER = -1;
+	private static final int COUNTER_ATTACKER_SURRENDER_POINTS = 0;
 
 	@Test
-	void givenADuelWithTwoFighters_ifDuelistNotAlive_duelWillNotStart() {
+	void givenADuelWithTwoFighters_ifAttackerIsNotAlive_duelWillNotStart() {
 		//Arrange
-		DuelistStub attacker = new DuelistStub();
-		DuelistStub counterAttacker = new DuelistStub();
-		attacker.isAlive = true;
-		counterAttacker.isAlive = false;
+		DeadDuelistMock attacker = new DeadDuelistMock();
+		Duelist counterAttacker = new DuelistDummy();
+		//Act
+		assertThrows(DeadDuelistCanNotDuelException.class, ()-> {
+			Duel duel = new Duel(attacker,counterAttacker);
+		});
+		//Assert
+	}
+	
+	@Test
+	void givenADuelWithTwoFighters_ifCounterAttackerIsNotAlive_duelWillNotStart() {
+		//Arrange
+		Duelist attacker = new DuelistDummy();
+		Duelist counterAttacker = new DeadDuelistMock();
+		//Act
+		assertThrows(DeadDuelistCanNotDuelException.class, ()-> {
+			Duel duel = new Duel(attacker,counterAttacker);
+		});
+		//Assert
+	}
+	
+	@Test
+	void givenADuelWithTwoFighters_ifBothDuelistAreNotAlive_duelWillNotStart() {
+		//Arrange
+		Duelist attacker = new DeadDuelistMock();
+		Duelist counterAttacker = new DeadDuelistMock();
 		//Act
 		assertThrows(DeadDuelistCanNotDuelException.class, ()-> {
 			Duel duel = new Duel(attacker,counterAttacker);
@@ -32,8 +60,6 @@ class DuelTest {
 		DuelistSpy attacker = new DuelistSpy();
 		DuelistSpy counterAttacker = new DuelistSpy();
 		Skill skill = new SkillDummy();
-		attacker.isAlive = true;
-		counterAttacker.isAlive = true;
 		Duel duel = new Duel(attacker, counterAttacker);
 		//Act
 		duel.fight(skill);
@@ -48,8 +74,6 @@ class DuelTest {
 		DuelistSpy attacker = new DuelistSpy();
 		DuelistSpy counterAttacker = new DuelistSpy();
 		Skill skill = new SkillDummy();
-		attacker.isAlive = true;
-		counterAttacker.isAlive = true;
 		attacker.power = 1;
 		counterAttacker.power = 0;
 		Duel duel = new Duel(attacker, counterAttacker);
@@ -68,8 +92,6 @@ class DuelTest {
 		DuelistSpy attacker = new DuelistSpy();
 		DuelistSpy counterAttacker = new DuelistSpy();
 		Skill skill = new SkillDummy();
-		attacker.isAlive = true;
-		counterAttacker.isAlive = true;
 		attacker.power = 0;
 		counterAttacker.power = 1;
 		Duel duel = new Duel(attacker, counterAttacker);
@@ -88,8 +110,6 @@ class DuelTest {
 		DuelistSpy attacker = new DuelistSpy();
 		DuelistSpy counterAttacker = new DuelistSpy();
 		Skill skill = new SkillDummy();
-		attacker.isAlive = true;
-		counterAttacker.isAlive = true;
 		attacker.power = 0;
 		counterAttacker.power = 0;
 		Duel duel = new Duel(attacker, counterAttacker);
@@ -107,8 +127,6 @@ class DuelTest {
 		//Arrange
 		DuelistSpy attacker = new DuelistSpy();
 		DuelistSpy counterAttacker = new DuelistSpy();
-		attacker.isAlive = true;
-		counterAttacker.isAlive = true;
 		attacker.power = 5;
 		counterAttacker.power = 0;
 		Duel duel = new Duel(attacker,counterAttacker);
@@ -128,8 +146,6 @@ class DuelTest {
 		//Arrange
 		DuelistSpy attacker = new DuelistSpy();
 		DuelistSpy counterAttacker = new DuelistSpy();
-		attacker.isAlive = true;
-		counterAttacker.isAlive = true;
 		attacker.power = 5;
 		counterAttacker.power = 0;
 		Duel duel = new Duel(attacker,counterAttacker);
@@ -137,10 +153,42 @@ class DuelTest {
 		
 		//Act
 		duel.fight(skill);
-		
+		int expectedDamage = attacker.power - counterAttacker.power;
 		//Assert
-		assertEquals(95,counterAttacker.hp);
+		assertEquals(expectedDamage,counterAttacker.hp);
 		assertEquals(-1,counterAttacker.points);
 		
+	}
+	
+	@Test
+	void givenADuelWithTwoFighters_whenAttackerSurrenders_thenCounterAttackerIsRewarded() {
+		//Arrange
+		Duelist attacker = new SurrenderDuelistMock();
+		DuelistSpy counterAttacker = new DuelistSpy();
+		Duel duel = new Duel(attacker,counterAttacker);
+		Skill skill = new SkillDummy();
+		
+		//Act
+		duel.fight(skill);
+		
+		//Assert
+		assertEquals(skill,counterAttacker.skill);
+		assertEquals(1,counterAttacker.points);
+	}
+	
+	@Test
+	void givenADuelWithTwoFighters_whenCounterAttackerSurrenders_thenAttackerIsRewarded() {
+		//Arrange
+		DuelistSpy attacker = new DuelistSpy();
+		Duelist counterAttacker = new SurrenderDuelistMock();
+		Duel duel = new Duel(attacker,counterAttacker);
+		Skill skill = new SkillDummy();
+		
+		//Act
+		duel.fight(skill);
+		
+		//Assert
+		assertEquals(COUNTER_ATTACKER_SURRENDER_POINTS,attacker.points);
+		assertEquals(skill,attacker.skill);
 	}
 }

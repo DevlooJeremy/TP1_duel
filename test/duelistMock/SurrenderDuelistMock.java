@@ -1,24 +1,25 @@
 package duelistMock;
 
+import Exception.AttackerHasSurrenderedException;
+import Exception.CounterAttackerHasSurrenderedException;
 import Skill.Skill;
 import duel.Duelist;
 
-public class DuelistStub implements Duelist{
-	public boolean isAlive;
-	
+public class SurrenderDuelistMock implements Duelist{
+
 	@Override
 	public boolean isAlive() {
-		return this.isAlive;
+		return true;
 	}
 
 	@Override
 	public int attack() {
-		return 0;
+		throw new AttackerHasSurrenderedException();
 	}
 
 	@Override
 	public int counterAttack() {
-		return 0;
+		throw new CounterAttackerHasSurrenderedException();
 	}
 
 	@Override
@@ -31,5 +32,4 @@ public class DuelistStub implements Duelist{
 		
 	}
 
-	
 }
