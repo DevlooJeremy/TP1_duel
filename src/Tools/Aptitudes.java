@@ -1,4 +1,4 @@
-package DTO;
+package Tools;
 
 import Exception.AptitudesPointsUsedBelow0;
 

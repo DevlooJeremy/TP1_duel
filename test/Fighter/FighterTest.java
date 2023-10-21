@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import DTO.Aptitudes;
 import Exception.AptitudesPointsUsedAbove100;
 import Exception.AptitudesPointsUsedBelow0;
 import FighterMock.FighterStub;
+import Tools.Aptitudes;
 import duel.Fighter;
 
 class FighterTest {
@@ -17,7 +17,7 @@ class FighterTest {
 	private static final int ANY_STRENGHT = 20;
 	private static final int ANY_FOCUS = 20;
 	private static final int TOO_HIGH_STRENGHT = 100;
-	private static final String ANY_NAME = "Jean";
+	public static final String ANY_NAME = "Jean";
 
 	@Test
 	void givenAFighter_whenCreatedWithMoreThenAHundredPoints_thenExceptionIsCalled() {

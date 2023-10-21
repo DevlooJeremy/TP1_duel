@@ -1,9 +1,9 @@
 package duel;
 
-import DTO.Aptitudes;
 import Exception.AptitudesPointsUsedAbove100;
 import Exception.AptitudesPointsUsedBelow0;
 import Skill.Skill;
+import Tools.Aptitudes;
 
 public abstract class Fighter implements Duelist{
 

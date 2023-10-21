@@ -1,6 +1,6 @@
 package FighterMock;
 
-import DTO.Aptitudes;
+import Tools.Aptitudes;
 import duel.Fighter;
 
 public class FighterStub extends Fighter{
