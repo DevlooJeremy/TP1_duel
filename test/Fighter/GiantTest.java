@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import Exception.GiantIllegalAptitudeException;
 import Tools.Aptitudes;
 import duel.Giant;
+import duel.Warrior;
 
 class GiantTest {
 	private static final int ANY_LEGAL_STRENGHT = 21;
@@ -60,6 +61,51 @@ class GiantTest {
 	void givenAGiantCreatedWithLegalAptitudes_whenCreated_noExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
 			Giant giant = new Giant(FighterTest.ANY_NAME,apt);
+	}
+	
+	@Test
+	void givenAGiantWhoLostAFight_whenPenalized_heLosesHP() {
+		//Arrange
+				Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
+				Giant giant = new Giant(FighterTest.ANY_NAME,apt);
+				
+				
+				//Act
+				giant.penalize(-1, 50);
+				int expectedHP = 200 - (ANY_LEGAL_STRENGHT + ANY_LEGAL_DEXTERITY + ANY_LEGAL_FOCUS +ANY_LEGAL_INTELLIGENCE + 50);
+				
+				//Assert
+				assertEquals(expectedHP,giant.getHP());
+	}
+	
+	@Test
+	void givenAGiantWhoLostAFight_whenPenalizedFinalAttackWithMoreThenDamageCap_heDies() {
+		//Arrange
+				Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
+				Giant giant = new Giant(FighterTest.ANY_NAME,apt);
+				
+				giant.penalize(-1, 112);
+				//Act
+				giant.penalize(-1, 11);
+				int expectedHP = 0;
+				
+				//Assert
+				assertEquals(expectedHP,giant.getHP());
+	}
+	
+	@Test
+	void givenAGiantWhoLostAFight_whenPenalizedFinalAttackWithLessThenDamageCap_heDoesNotTakeDamage() {
+		//Arrange
+				Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
+				Giant giant = new Giant(FighterTest.ANY_NAME,apt);
+				
+				giant.penalize(-1, 112);
+				//Act
+				giant.penalize(-1, 10);
+				int expectedHP = 200 - (ANY_LEGAL_STRENGHT + ANY_LEGAL_DEXTERITY + ANY_LEGAL_FOCUS + ANY_LEGAL_INTELLIGENCE + 112);
+				
+				//Assert
+				assertEquals(expectedHP,giant.getHP());
 	}
 
 }

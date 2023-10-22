@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import Exception.WarriorIllegalAptitudeException;
+import FighterMock.FighterStub;
 import Tools.Aptitudes;
 import duel.Warrior;
 
@@ -54,6 +55,39 @@ class WarriorTest {
 	void givenAWarriorCreatedWithLegalAptitudes_whenCreated_noExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_FOCUS,ANY_LEGAL_INTELLIGENCE);
 			Warrior warrior = new Warrior(FighterTest.ANY_NAME,apt);
+	}
+	
+	@Test
+	void givenAWarriorWhoLostAFight_whenPenalized_heLosesHP() {
+		//Arrange
+				Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_FOCUS,ANY_LEGAL_INTELLIGENCE);
+				Warrior warrior = new Warrior(FighterTest.ANY_NAME,apt);
+				
+				
+				//Act
+				warrior.penalize(-1, 50);
+				int expectedHP = 200 - (ANY_LEGAL_STRENGHT + ANY_LEGAL_DEXTERITY + ANY_FOCUS +ANY_LEGAL_INTELLIGENCE + 50);
+				
+				//Assert
+				assertEquals(expectedHP,warrior.getHP());
+	}
+	@Test
+	void givenAWarriorWithBelowHPThreshold_whenPenalized_heGainsHPInstead() {
+		//Arrange
+				Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_FOCUS,ANY_LEGAL_INTELLIGENCE);
+				Warrior warrior = new Warrior(FighterTest.ANY_NAME,apt);
+				
+				warrior.penalize(-1, 130);
+				//Act
+				warrior.penalize(-1, 50);
+				int expectedHP = 200 - (ANY_LEGAL_STRENGHT + ANY_LEGAL_DEXTERITY + ANY_FOCUS +ANY_LEGAL_INTELLIGENCE + 130 - 50);
+				
+				//Assert
+				assertEquals(expectedHP,warrior.getHP());
+		
+		//Act
+		
+		//Assert
 	}
 
 }

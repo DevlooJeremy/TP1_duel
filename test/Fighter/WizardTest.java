@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import Exception.WizardIllegalAptitudeException;
 import Tools.Aptitudes;
+import duel.Warrior;
 import duel.Wizard;
 
 class WizardTest {
@@ -43,5 +44,20 @@ class WizardTest {
 	void givenAWizardCreatedWithLegalAptitude_whenCreated_noExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
 			Wizard warrior = new Wizard(FighterTest.ANY_NAME,apt);
+	}
+	
+	@Test
+	void givenAWizardWhoLostAFight_whenPenalized_heLosesHalfDamageHasHP() {
+		//Arrange
+				Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
+				Wizard wizard = new Wizard(FighterTest.ANY_NAME,apt);
+				
+				
+				//Act
+				wizard.penalize(-1, 50);
+				int expectedHP = 200 - (ANY_STRENGHT + ANY_DEXTERITY + ANY_LEGAL_FOCUS +ANY_LEGAL_INTELLIGENCE + 50/2);
+				
+				//Assert
+				assertEquals(expectedHP,wizard.getHP());
 	}
 }

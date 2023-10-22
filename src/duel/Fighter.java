@@ -2,6 +2,7 @@ package duel;
 
 import Exception.AptitudesPointsUsedAbove100;
 import Exception.AptitudesPointsUsedBelow0;
+import Exception.NegativeHPException;
 import Skill.Skill;
 import Tools.Aptitudes;
 
@@ -14,6 +15,7 @@ public abstract class Fighter implements Duelist{
 	private int strenght;
 	private int focus;
 	private int hp;
+	private int points;
 	
 	public Fighter(String name, Aptitudes aptitudes) {
 		if (aptitudes.dexterity + aptitudes.strenght + aptitudes.intelligence + aptitudes.focus > 100) throw new AptitudesPointsUsedAbove100();
@@ -27,8 +29,8 @@ public abstract class Fighter implements Duelist{
 	
 	@Override
 	public boolean isAlive() {
-		// TODO Auto-generated method stub
-		return false;
+		if (this.hp < 0) throw new NegativeHPException();
+		return this.hp != 0;
 	}
 
 	@Override
@@ -51,7 +53,14 @@ public abstract class Fighter implements Duelist{
 
 	@Override
 	public void penalize(int penalityPointsNumber, int healthPoints) {
-		// TODO Auto-generated method stub
+		if (this.hp < healthPoints)
+		{
+			this.hp -= this.hp;
+		}
+		else 
+		{
+			this.hp -= healthPoints;			
+		}
 		
 	}
 

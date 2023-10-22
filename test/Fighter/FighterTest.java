@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import Exception.AptitudesPointsUsedAbove100;
 import Exception.AptitudesPointsUsedBelow0;
+import Exception.NegativeHPException;
 import FighterMock.FighterStub;
 import Tools.Aptitudes;
 import duel.Fighter;
@@ -29,7 +30,7 @@ class FighterTest {
 	}
 	
 	@Test
-	void gievenAFighter_whenCreated_fighterShouldSetAllHisAttributes() {
+	void givenAFighter_whenCreated_fighterShouldSetAllHisAttributes() {
 		//Arrange
 		Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_FOCUS,ANY_INTELLIGENCE);
 		//Act
@@ -42,6 +43,21 @@ class FighterTest {
 		assertEquals(ANY_DEXTERITY,fighter.getDexterity());
 		assertEquals(ANY_FOCUS,fighter.getFocus());
 		assertEquals(ANY_INTELLIGENCE,fighter.getIntelligence());
+	}
+	
+	@Test 
+	void givenAFighterWhoLostAFight_whenPenalized_heLosesTheGoodAmountOfHP() {
+		//Arrange
+		Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_FOCUS,ANY_INTELLIGENCE);
+		FighterStub fighter = new FighterStub(ANY_NAME,apt);
+		
+		
+		//Act
+		fighter.penalize(-1, 100);
+		int expectedHP = 200 - (ANY_STRENGHT + ANY_DEXTERITY + ANY_FOCUS +ANY_INTELLIGENCE + 100);
+		
+		//Assert
+		assertEquals(expectedHP,fighter.getHP());
 	}
 	
 	
