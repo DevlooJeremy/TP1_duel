@@ -4,7 +4,9 @@ import Exception.AptitudesPointsUsedAbove100;
 import Exception.AptitudesPointsUsedBelow0;
 import Exception.NegativeHPException;
 import Skill.Skill;
+import SkillMock.SkillDummy;
 import Tools.Aptitudes;
+import bag.Bag;
 
 public abstract class Fighter implements Duelist{
 
@@ -16,8 +18,9 @@ public abstract class Fighter implements Duelist{
 	private int focus;
 	private int hp;
 	private int points;
+	private Bag skillBag;
 	
-	public Fighter(String name, Aptitudes aptitudes) {
+	public Fighter(String name, Aptitudes aptitudes, Bag bag) {
 		if (aptitudes.dexterity + aptitudes.strenght + aptitudes.intelligence + aptitudes.focus > 100) throw new AptitudesPointsUsedAbove100();
 		this.name = name;
 		this.intelligence = aptitudes.intelligence;
@@ -25,6 +28,9 @@ public abstract class Fighter implements Duelist{
 		this.strenght = aptitudes.strenght;
 		this.focus = aptitudes.focus;
 		this.hp = 200 - (aptitudes.dexterity + aptitudes.strenght + aptitudes.intelligence + aptitudes.focus);
+		this.skillBag = bag;
+		bag.addSkill(new SkillDummy());
+		bag.addSkill(new SkillDummy());
 	}
 	
 	@Override

@@ -10,6 +10,8 @@ import Exception.AptitudesPointsUsedBelow0;
 import Exception.NegativeHPException;
 import FighterMock.FighterStub;
 import Tools.Aptitudes;
+import bag.Bag;
+import bagMock.BagDummy;
 import duel.Fighter;
 
 class FighterTest {
@@ -18,14 +20,19 @@ class FighterTest {
 	private static final int ANY_STRENGHT = 20;
 	private static final int ANY_FOCUS = 20;
 	private static final int TOO_HIGH_STRENGHT = 100;
+	private static final int ANY_DAMAGE_DEALT = 100;
+	
 	public static final String ANY_NAME = "Jean";
+	public static final int BASE_FIGHTER_HP = 200;
+	public static final int LOSER_PENALITY = -1;
 
 	@Test
 	void givenAFighter_whenCreatedWithMoreThenAHundredPoints_thenExceptionIsCalled() {
 		Aptitudes apt = new Aptitudes(TOO_HIGH_STRENGHT,ANY_DEXTERITY,ANY_FOCUS,ANY_INTELLIGENCE);
+		Bag bag = new BagDummy();
 		
 		assertThrows(AptitudesPointsUsedAbove100.class,()-> {
-			Fighter fighter = new FighterStub(ANY_NAME,apt);
+			Fighter fighter = new FighterStub(ANY_NAME,apt,bag);
 		});
 	}
 	
@@ -33,9 +40,10 @@ class FighterTest {
 	void givenAFighter_whenCreated_fighterShouldSetAllHisAttributes() {
 		//Arrange
 		Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_FOCUS,ANY_INTELLIGENCE);
+		Bag bag = new BagDummy();
 		//Act
-		FighterStub fighter = new FighterStub(ANY_NAME,apt);
-		int expectedHP = 200 - (ANY_STRENGHT + ANY_DEXTERITY + ANY_FOCUS +ANY_INTELLIGENCE);
+		FighterStub fighter = new FighterStub(ANY_NAME,apt,bag);
+		int expectedHP = BASE_FIGHTER_HP - (ANY_STRENGHT + ANY_DEXTERITY + ANY_FOCUS +ANY_INTELLIGENCE);
 		//Assert
 		assertEquals(expectedHP,fighter.getHP());
 		assertEquals(ANY_NAME,fighter.getName());
@@ -49,12 +57,13 @@ class FighterTest {
 	void givenAFighterWhoLostAFight_whenPenalized_heLosesTheGoodAmountOfHP() {
 		//Arrange
 		Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_FOCUS,ANY_INTELLIGENCE);
-		FighterStub fighter = new FighterStub(ANY_NAME,apt);
+		Bag bag = new BagDummy();
+		FighterStub fighter = new FighterStub(ANY_NAME,apt,bag);
 		
 		
 		//Act
-		fighter.penalize(-1, 100);
-		int expectedHP = 200 - (ANY_STRENGHT + ANY_DEXTERITY + ANY_FOCUS +ANY_INTELLIGENCE + 100);
+		fighter.penalize(LOSER_PENALITY, ANY_DAMAGE_DEALT);
+		int expectedHP = BASE_FIGHTER_HP - (ANY_STRENGHT + ANY_DEXTERITY + ANY_FOCUS +ANY_INTELLIGENCE + ANY_DAMAGE_DEALT);
 		
 		//Assert
 		assertEquals(expectedHP,fighter.getHP());

@@ -2,13 +2,14 @@ package duel;
 
 import Exception.GiantIllegalAptitudeException;
 import Tools.Aptitudes;
+import bag.Bag;
 
 public class Giant extends Fighter{
 	
 	public static final int MINIMUM_DAMAGE_TO_FINISH_GIANT = 11;
 
-	public Giant(String name, Aptitudes aptitudes) {
-		super(name, aptitudes);
+	public Giant(String name, Aptitudes aptitudes, Bag bag) {
+		super(name, aptitudes, bag);
 		if (aptitudes.strenght < 20) throw new GiantIllegalAptitudeException(); 
 		if (aptitudes.dexterity < 20) throw new GiantIllegalAptitudeException(); 
 		if (aptitudes.focus < 20) throw new GiantIllegalAptitudeException(); 
