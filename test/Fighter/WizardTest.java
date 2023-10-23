@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import Exception.WizardIllegalAptitudeException;
+import Skill.Skill;
+import SkillMock.SkillDummy;
 import Tools.Aptitudes;
 import bag.Bag;
 import bagMock.BagDummy;
@@ -27,7 +29,9 @@ class WizardTest {
 	@Test
 	void givenAWizardCreatedWithIllegalFocus_whenCreated_anExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_ILLEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
-		Bag bag = new BagDummy();
+		Skill firstSkill = new SkillDummy();
+		Skill secondSkill = new SkillDummy();
+		Bag bag = new BagDummy(firstSkill,secondSkill);
 		
 		assertThrows(WizardIllegalAptitudeException.class, ()-> {
 			Wizard warrior = new Wizard(FighterTest.ANY_NAME,apt,bag);
@@ -38,7 +42,9 @@ class WizardTest {
 	@Test
 	void givenAWizardCreatedWithIllegalIntelligence_whenCreated_anExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_LEGAL_FOCUS,ANY_ILLEGAL_INTELLIGENCE);
-		Bag bag = new BagDummy();
+		Skill firstSkill = new SkillDummy();
+		Skill secondSkill = new SkillDummy();
+		Bag bag = new BagDummy(firstSkill,secondSkill);
 		
 		assertThrows(WizardIllegalAptitudeException.class, ()-> {
 			Wizard warrior = new Wizard(FighterTest.ANY_NAME,apt,bag);
@@ -49,7 +55,9 @@ class WizardTest {
 	@Test
 	void givenAWizardCreatedWithLegalAptitude_whenCreated_noExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
-		Bag bag = new BagDummy();
+		Skill firstSkill = new SkillDummy();
+		Skill secondSkill = new SkillDummy();
+		Bag bag = new BagDummy(firstSkill,secondSkill);
 			Wizard warrior = new Wizard(FighterTest.ANY_NAME,apt,bag);
 	}
 	
@@ -57,7 +65,9 @@ class WizardTest {
 	void givenAWizardWhoLostAFight_whenPenalized_heLosesHalfDamageHasHP() {
 		//Arrange
 				Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
-				Bag bag = new BagDummy();
+				Skill firstSkill = new SkillDummy();
+				Skill secondSkill = new SkillDummy();
+				Bag bag = new BagDummy(firstSkill,secondSkill);
 				Wizard wizard = new Wizard(FighterTest.ANY_NAME,apt,bag);
 				
 				

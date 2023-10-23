@@ -9,6 +9,8 @@ import Exception.AptitudesPointsUsedAbove100;
 import Exception.AptitudesPointsUsedBelow0;
 import Exception.NegativeHPException;
 import FighterMock.FighterStub;
+import Skill.Skill;
+import SkillMock.SkillDummy;
 import Tools.Aptitudes;
 import bag.Bag;
 import bagMock.BagDummy;
@@ -29,7 +31,9 @@ class FighterTest {
 	@Test
 	void givenAFighter_whenCreatedWithMoreThenAHundredPoints_thenExceptionIsCalled() {
 		Aptitudes apt = new Aptitudes(TOO_HIGH_STRENGHT,ANY_DEXTERITY,ANY_FOCUS,ANY_INTELLIGENCE);
-		Bag bag = new BagDummy();
+		Skill firstSkill = new SkillDummy();
+		Skill secondSkill = new SkillDummy();
+		Bag bag = new BagDummy(firstSkill,secondSkill);
 		
 		assertThrows(AptitudesPointsUsedAbove100.class,()-> {
 			Fighter fighter = new FighterStub(ANY_NAME,apt,bag);
@@ -40,7 +44,9 @@ class FighterTest {
 	void givenAFighter_whenCreated_fighterShouldSetAllHisAttributes() {
 		//Arrange
 		Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_FOCUS,ANY_INTELLIGENCE);
-		Bag bag = new BagDummy();
+		Skill firstSkill = new SkillDummy();
+		Skill secondSkill = new SkillDummy();
+		Bag bag = new BagDummy(firstSkill,secondSkill);
 		//Act
 		FighterStub fighter = new FighterStub(ANY_NAME,apt,bag);
 		int expectedHP = BASE_FIGHTER_HP - (ANY_STRENGHT + ANY_DEXTERITY + ANY_FOCUS +ANY_INTELLIGENCE);
@@ -57,7 +63,9 @@ class FighterTest {
 	void givenAFighterWhoLostAFight_whenPenalized_heLosesTheGoodAmountOfHP() {
 		//Arrange
 		Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_FOCUS,ANY_INTELLIGENCE);
-		Bag bag = new BagDummy();
+		Skill firstSkill = new SkillDummy();
+		Skill secondSkill = new SkillDummy();
+		Bag bag = new BagDummy(firstSkill,secondSkill);
 		FighterStub fighter = new FighterStub(ANY_NAME,apt,bag);
 		
 		

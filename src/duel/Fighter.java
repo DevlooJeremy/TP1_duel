@@ -29,8 +29,6 @@ public abstract class Fighter implements Duelist{
 		this.focus = aptitudes.focus;
 		this.hp = 200 - (aptitudes.dexterity + aptitudes.strenght + aptitudes.intelligence + aptitudes.focus);
 		this.skillBag = bag;
-		bag.addSkill(new SkillDummy());
-		bag.addSkill(new SkillDummy());
 	}
 	
 	@Override
