@@ -3,14 +3,14 @@ package bagMock;
 import Skill.Skill;
 import bag.Bag;
 
-public class BagDummy implements Bag{
-
-	public BagDummy() {
+public class NullSkillBag implements Bag{
+	
+	public NullSkillBag() {
 		
 	}
+
 	@Override
 	public void addSkill(Skill skill) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -19,12 +19,16 @@ public class BagDummy implements Bag{
 		// TODO Auto-generated method stub
 		
 	}
+
 	@Override
 	public Skill getAttackingSkill() {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
 	public Skill getCounterAttackingSkill() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

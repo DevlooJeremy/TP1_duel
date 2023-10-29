@@ -2,6 +2,8 @@ package duel;
 
 import Exception.AptitudesPointsUsedAbove100;
 import Exception.AptitudesPointsUsedBelow0;
+import Exception.AttackerHasSurrenderedException;
+import Exception.CounterAttackerHasSurrenderedException;
 import Exception.NegativeHPException;
 import Skill.Skill;
 import SkillMock.SkillDummy;
@@ -33,30 +35,39 @@ public abstract class Fighter implements Duelist{
 	
 	@Override
 	public boolean isAlive() {
-		if (this.hp < 0) throw new NegativeHPException();
 		return this.hp != 0;
 	}
 
 	@Override
 	public int attack() {
-		// TODO Auto-generated method stub
-		return 0;
+		Skill attackingSkill = this.skillBag.getAttackingSkill();
+		if (attackingSkill == null) throw new AttackerHasSurrenderedException();
+		return attackingSkill.getPower(this);
 	}
 
 	@Override
 	public int counterAttack() {
-		// TODO Auto-generated method stub
-		return 0;
+		Skill counterAttackingSkill = this.skillBag.getCounterAttackingSkill();
+		if (counterAttackingSkill == null) throw new CounterAttackerHasSurrenderedException();
+		return counterAttackingSkill.getPower(this);
 	}
 
 	@Override
 	public void reward(int rewardPointsNumber, Skill prizeForWinner) {
-		// TODO Auto-generated method stub
+		this.strenght += rewardPointsNumber;
+		this.dexterity += rewardPointsNumber;
+		this.focus += rewardPointsNumber;
+		this.intelligence += rewardPointsNumber;
+		this.skillBag.addSkill(prizeForWinner);
 		
 	}
 
 	@Override
 	public void penalize(int penalityPointsNumber, int healthPoints) {
+		this.strenght -= penalityPointsNumber;
+		this.dexterity -= penalityPointsNumber;
+		this.focus -= penalityPointsNumber;
+		this.intelligence -= penalityPointsNumber;
 		if (this.hp < healthPoints)
 		{
 			this.hp -= this.hp;

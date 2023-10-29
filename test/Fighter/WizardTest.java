@@ -29,9 +29,7 @@ class WizardTest {
 	@Test
 	void givenAWizardCreatedWithIllegalFocus_whenCreated_anExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_ILLEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
-		Skill firstSkill = new SkillDummy();
-		Skill secondSkill = new SkillDummy();
-		Bag bag = new BagDummy(firstSkill,secondSkill);
+		Bag bag = new BagDummy();
 		
 		assertThrows(WizardIllegalAptitudeException.class, ()-> {
 			Wizard warrior = new Wizard(FighterTest.ANY_NAME,apt,bag);
@@ -42,9 +40,7 @@ class WizardTest {
 	@Test
 	void givenAWizardCreatedWithIllegalIntelligence_whenCreated_anExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_LEGAL_FOCUS,ANY_ILLEGAL_INTELLIGENCE);
-		Skill firstSkill = new SkillDummy();
-		Skill secondSkill = new SkillDummy();
-		Bag bag = new BagDummy(firstSkill,secondSkill);
+		Bag bag = new BagDummy();
 		
 		assertThrows(WizardIllegalAptitudeException.class, ()-> {
 			Wizard warrior = new Wizard(FighterTest.ANY_NAME,apt,bag);
@@ -55,9 +51,7 @@ class WizardTest {
 	@Test
 	void givenAWizardCreatedWithLegalAptitude_whenCreated_noExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
-		Skill firstSkill = new SkillDummy();
-		Skill secondSkill = new SkillDummy();
-		Bag bag = new BagDummy(firstSkill,secondSkill);
+		Bag bag = new BagDummy();
 			Wizard warrior = new Wizard(FighterTest.ANY_NAME,apt,bag);
 	}
 	
@@ -67,7 +61,7 @@ class WizardTest {
 				Aptitudes apt = new Aptitudes(ANY_STRENGHT,ANY_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
 				Skill firstSkill = new SkillDummy();
 				Skill secondSkill = new SkillDummy();
-				Bag bag = new BagDummy(firstSkill,secondSkill);
+				Bag bag = new BagDummy();
 				Wizard wizard = new Wizard(FighterTest.ANY_NAME,apt,bag);
 				
 				

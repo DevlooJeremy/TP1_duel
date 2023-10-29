@@ -1,6 +1,7 @@
 package bag;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import Skill.Skill;
@@ -25,5 +26,25 @@ public class FighterBag implements Bag{
 	public void withdrawSkill(Skill skill) {
 		this.inventory.remove(skill);
 	}
+
+	@Override
+	public Skill getAttackingSkill() {
+		for (Skill skill : inventory) {
+			if (skill.isOffensiveSkill()) {
+				return skill;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public Skill getCounterAttackingSkill() {
+		if (!inventory.isEmpty()) {
+			return inventory.get(0);
+		}
+		return null;
+	}
+	
+	
 
 }

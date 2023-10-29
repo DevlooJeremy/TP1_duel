@@ -5,12 +5,8 @@ import duel.Fighter;
 import duel.Giant;
 import duel.Warrior;
 import duel.Wizard;
+import factoryEnum.FighterType;
 
-enum FighterType {
-		Wizard,
-		Warrior,
-		Giant;
-	}
 
 public class FighterFactory {
 	

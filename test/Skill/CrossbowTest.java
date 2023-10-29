@@ -45,7 +45,7 @@ class CrossbowTest {
 		//Arrange
 		Crossbow crossbow = new Crossbow(ANY_ACCURACY);
 		Aptitudes apt = new Aptitudes(ANY_APTITUDE_POINTS,ANY_APTITUDE_POINTS,ANY_APTITUDE_POINTS,ANY_APTITUDE_POINTS);
-		Bag bag = new BagDummy(new SkillDummy(), new SkillDummy());
+		Bag bag = new BagDummy();
 		Fighter fighter = new FighterStub(ANY_NAME,apt,bag);
 		
 		//Act

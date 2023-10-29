@@ -33,9 +33,7 @@ class GiantTest {
 	@Test
 	void givenAGiantCreatedWithIllegalStrenght_whenCreated_anExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_ILLEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
-		Skill firstSkill = new SkillDummy();
-		Skill secondSkill = new SkillDummy();
-		Bag bag = new BagDummy(firstSkill,secondSkill);
+		Bag bag = new BagDummy();
 		
 		assertThrows(GiantIllegalAptitudeException.class, ()-> {
 			Giant giant = new Giant(FighterTest.ANY_NAME,apt,bag);
@@ -45,9 +43,7 @@ class GiantTest {
 	@Test
 	void givenAGiantCreatedWithIllegalDexterity_whenCreated_anExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_ILLEGAL_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
-		Skill firstSkill = new SkillDummy();
-		Skill secondSkill = new SkillDummy();
-		Bag bag = new BagDummy(firstSkill,secondSkill);
+		Bag bag = new BagDummy();
 		
 		assertThrows(GiantIllegalAptitudeException.class, ()-> {
 			Giant giant = new Giant(FighterTest.ANY_NAME,apt,bag);
@@ -57,9 +53,7 @@ class GiantTest {
 	@Test
 	void givenAGiantCreatedWithIllegalFocus_whenCreated_anExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_ILLEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
-		Skill firstSkill = new SkillDummy();
-		Skill secondSkill = new SkillDummy();
-		Bag bag = new BagDummy(firstSkill,secondSkill);
+		Bag bag = new BagDummy();
 		
 		assertThrows(GiantIllegalAptitudeException.class, ()-> {
 			Giant giant = new Giant(FighterTest.ANY_NAME,apt,bag);
@@ -69,9 +63,7 @@ class GiantTest {
 	@Test
 	void givenAGiantCreatedWithIllegalIntelligence_whenCreated_anExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_LEGAL_FOCUS,ANY_ILLEGAL_INTELLIGENCE);
-		Skill firstSkill = new SkillDummy();
-		Skill secondSkill = new SkillDummy();
-		Bag bag = new BagDummy(firstSkill,secondSkill);
+		Bag bag = new BagDummy();
 		
 		assertThrows(GiantIllegalAptitudeException.class, ()-> {
 			Giant giant = new Giant(FighterTest.ANY_NAME,apt,bag);
@@ -81,9 +73,7 @@ class GiantTest {
 	@Test
 	void givenAGiantCreatedWithLegalAptitudes_whenCreated_noExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
-		Skill firstSkill = new SkillDummy();
-		Skill secondSkill = new SkillDummy();
-		Bag bag = new BagDummy(firstSkill,secondSkill);
+		Bag bag = new BagDummy();
 			Giant giant = new Giant(FighterTest.ANY_NAME,apt,bag);
 	}
 	
@@ -91,9 +81,7 @@ class GiantTest {
 	void givenAGiantWhoLostAFight_whenPenalized_heLosesHP() {
 		//Arrange
 				Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
-				Skill firstSkill = new SkillDummy();
-				Skill secondSkill = new SkillDummy();
-				Bag bag = new BagDummy(firstSkill,secondSkill);
+				Bag bag = new BagDummy();
 				Giant giant = new Giant(FighterTest.ANY_NAME,apt,bag);
 				
 				
@@ -109,9 +97,7 @@ class GiantTest {
 	void givenAGiantWhoLostAFight_whenPenalizedFinalAttackWithMoreThenDamageCap_heDies() {
 		//Arrange
 				Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
-				Skill firstSkill = new SkillDummy();
-				Skill secondSkill = new SkillDummy();
-				Bag bag = new BagDummy(firstSkill,secondSkill);
+				Bag bag = new BagDummy();
 				Giant giant = new Giant(FighterTest.ANY_NAME,apt,bag);
 				
 				giant.penalize(FighterTest.LOSER_PENALITY, ANY_DAMAGE_TO_LOWER_TO_HP_THRESHOLD);
@@ -127,9 +113,7 @@ class GiantTest {
 	void givenAGiantWhoLostAFight_whenPenalizedFinalAttackWithLessThenDamageCap_heDoesNotTakeDamage() {
 		//Arrange
 				Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_LEGAL_FOCUS,ANY_LEGAL_INTELLIGENCE);
-				Skill firstSkill = new SkillDummy();
-				Skill secondSkill = new SkillDummy();
-				Bag bag = new BagDummy(firstSkill,secondSkill);
+				Bag bag = new BagDummy();
 				Giant giant = new Giant(FighterTest.ANY_NAME,apt,bag);
 				
 				giant.penalize(FighterTest.LOSER_PENALITY, ANY_DAMAGE_TO_LOWER_TO_HP_THRESHOLD);

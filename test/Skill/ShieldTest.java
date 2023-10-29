@@ -45,7 +45,7 @@ class ShieldTest {
 		//Arrange
 		Shield shield = new Shield(ANY_PROTECTION);
 		Aptitudes apt = new Aptitudes(ANY_APTITUDE_POINTS,ANY_APTITUDE_POINTS,ANY_APTITUDE_POINTS,ANY_APTITUDE_POINTS);
-		Bag bag = new BagDummy(new SkillDummy(), new SkillDummy());
+		Bag bag = new BagDummy();
 		Fighter fighter = new FighterStub(ANY_NAME,apt,bag);
 		
 		//Act

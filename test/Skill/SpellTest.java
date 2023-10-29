@@ -57,7 +57,7 @@ class SpellTest {
 		//Arrange
 		Spell spell = new Spell(ANY_PROWESS);
 		Aptitudes apt = new Aptitudes(ANY_APTITUDE_POINTS,ANY_APTITUDE_POINTS,ANY_APTITUDE_POINTS,ANY_APTITUDE_POINTS);
-		Bag bag = new BagDummy(new SkillDummy(), new SkillDummy());
+		Bag bag = new BagDummy();
 		Fighter fighter = new FighterStub(ANY_NAME,apt,bag);
 		
 		//Act

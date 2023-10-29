@@ -31,9 +31,7 @@ class WarriorTest {
 	@Test
 	void givenAWarriorCreatedWithIllegalStrenght_whenCreated_anExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_ILLEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_FOCUS,ANY_LEGAL_INTELLIGENCE);
-		Skill firstSkill = new SkillDummy();
-		Skill secondSkill = new SkillDummy();
-		Bag bag = new BagDummy(firstSkill,secondSkill);
+		Bag bag = new BagDummy();
 		
 		assertThrows(WarriorIllegalAptitudeException.class, ()-> {
 			Warrior warrior = new Warrior(FighterTest.ANY_NAME,apt,bag);
@@ -44,9 +42,7 @@ class WarriorTest {
 	@Test
 	void givenAWarriorCreatedWithIllegalDexterity_whenCreated_anExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_ILLEGAL_DEXTERITY,ANY_FOCUS,ANY_LEGAL_INTELLIGENCE);
-		Skill firstSkill = new SkillDummy();
-		Skill secondSkill = new SkillDummy();
-		Bag bag = new BagDummy(firstSkill,secondSkill);
+		Bag bag = new BagDummy();
 		
 		assertThrows(WarriorIllegalAptitudeException.class, ()-> {
 			Warrior warrior = new Warrior(FighterTest.ANY_NAME,apt,bag);
@@ -57,9 +53,7 @@ class WarriorTest {
 	@Test
 	void givenAWarriorCreatedWithIllegalIntelligence_whenCreated_anExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_FOCUS,ANY_ILLEGAL_INTELLIGENCE);
-		Skill firstSkill = new SkillDummy();
-		Skill secondSkill = new SkillDummy();
-		Bag bag = new BagDummy(firstSkill,secondSkill);
+		Bag bag = new BagDummy();
 		
 		assertThrows(WarriorIllegalAptitudeException.class, ()-> {
 			Warrior warrior = new Warrior(FighterTest.ANY_NAME,apt,bag);
@@ -70,9 +64,7 @@ class WarriorTest {
 	@Test
 	void givenAWarriorCreatedWithLegalAptitudes_whenCreated_noExceptionIsThrown() {
 		Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_FOCUS,ANY_LEGAL_INTELLIGENCE);
-		Skill firstSkill = new SkillDummy();
-		Skill secondSkill = new SkillDummy();
-		Bag bag = new BagDummy(firstSkill,secondSkill);
+		Bag bag = new BagDummy();
 			Warrior warrior = new Warrior(FighterTest.ANY_NAME,apt,bag);
 	}
 	
@@ -80,9 +72,7 @@ class WarriorTest {
 	void givenAWarriorWhoLostAFight_whenPenalized_heLosesHP() {
 		//Arrange
 				Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_FOCUS,ANY_LEGAL_INTELLIGENCE);
-				Skill firstSkill = new SkillDummy();
-				Skill secondSkill = new SkillDummy();
-				Bag bag = new BagDummy(firstSkill,secondSkill);
+				Bag bag = new BagDummy();
 				Warrior warrior = new Warrior(FighterTest.ANY_NAME,apt,bag);
 				
 				
@@ -97,9 +87,7 @@ class WarriorTest {
 	void givenAWarriorWithBelowHPThreshold_whenPenalized_heGainsHPInstead() {
 		//Arrange
 				Aptitudes apt = new Aptitudes(ANY_LEGAL_STRENGHT,ANY_LEGAL_DEXTERITY,ANY_FOCUS,ANY_LEGAL_INTELLIGENCE);
-				Skill firstSkill = new SkillDummy();
-				Skill secondSkill = new SkillDummy();
-				Bag bag = new BagDummy(firstSkill,secondSkill);
+				Bag bag = new BagDummy();
 				Warrior warrior = new Warrior(FighterTest.ANY_NAME,apt,bag);
 				
 				warrior.penalize(FighterTest.LOSER_PENALITY, ANY_DAMAGE_TO_LOWER_UNDER_THRESHOLD_HP);
