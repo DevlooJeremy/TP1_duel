@@ -23,5 +23,10 @@ public class Shield extends Weapons{
 	{
 		return (this.protection * fighter.getDexterity())/20;
 	}
+	
+	@Override
+	public String toString() {
+		return " SkillType: Shield" + " Protection: " + this.protection;
+	}
 
 }

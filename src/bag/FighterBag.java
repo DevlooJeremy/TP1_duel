@@ -45,6 +45,13 @@ public class FighterBag implements Bag{
 		return null;
 	}
 	
-	
+	@Override 
+	public String toString() {
+		String stringToReturn = "";
+		for (Skill skill : inventory) {
+			stringToReturn += skill.toString();
+			}
+		return stringToReturn;
+	}
 
 }

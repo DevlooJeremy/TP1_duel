@@ -24,4 +24,9 @@ public class Spell extends Weapons{
 		return (this.prowess * fighter.getIntelligence())/20;
 	}
 
+	@Override
+	public String toString() {
+		return " SkillType: Spell" + " Prowess: " + this.prowess;
+	}
+
 }

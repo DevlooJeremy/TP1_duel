@@ -23,5 +23,10 @@ public class Crossbow extends Weapons{
 		
 		return (this.accuracy*fighter.getFocus())/20;
 	}
+	
+	@Override
+	public String toString() {
+		return " SkillType: Crossbow" + " Accuracy: " + this.accuracy;
+	}
 
 }

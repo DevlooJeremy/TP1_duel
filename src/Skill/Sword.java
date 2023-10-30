@@ -22,5 +22,10 @@ public class Sword extends Weapons{
 	{
 		return (this.impact * fighter.getStrenght())/20;
 	}
+	
+	@Override
+	public String toString() {
+		return " SkillType: Sword" + " Impact: " + this.impact;
+	}
 
 }

@@ -19,7 +19,6 @@ public abstract class Fighter implements Duelist{
 	private int strenght;
 	private int focus;
 	private int hp;
-	private int points;
 	private Bag skillBag;
 	
 	public Fighter(String name, Aptitudes aptitudes, Bag bag) {
@@ -77,6 +76,13 @@ public abstract class Fighter implements Duelist{
 			this.hp -= healthPoints;			
 		}
 		
+	}
+	
+	@Override
+	public String toString() {
+		return "Nom: " + this.name + " HealtPoints: " + this.hp + " Strenght: " + this.strenght + " Dexterity: " + 
+			   this.dexterity + " Focus: " + this.focus + " Intelligence: " + 
+			   this.intelligence + " Capacités" + this.skillBag.toString();
 	}
 
 	public String getName() {
